@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+<style>
+body {
+height: 100vh;
+margin: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background: linear-gradient(135deg, #ff758c, #ff7eb3);
+font-family: "Poppins", Arial, sans-serif;
+overflow: hidden;
+}
+
+.box {
+background: white;
+padding: 35px 25px;
+border-radius: 20px;
+text-align: center;
+box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+position: relative;
+width: 320px;
+height: 240px;
+animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+from { transform: scale(0.8); opacity: 0; }
+to { transform: scale(1); opacity: 1; }
+}
+
+h1 {
+margin-bottom: 25px;
+color: #ff4d6d;
+}
+
+button {
+padding: 12px 26px;
+font-size: 16px;
+border: none;
+border-radius: 999px;
+cursor: pointer;
+transition: transform 0.2s ease;
+}
+
+button:hover {
+transform: scale(1.08);
+}
+
+#yes {
+background: linear-gradient(135deg, #ff4d6d, #ff758c);
+color: white;
+margin-right: 12px;
+}
+
+#no {
+background-color: #dee2e6;
+color: #333;
+position: absolute;
+}
+
+.heart {
+position: fixed;
+color: #ff4d6d;
+font-size: 20px;
+animation: float 5s linear infinite;
+opacity: 0.7;
+}
+
+@keyframes float {
+from { transform: translateY(100vh); }
+to { transform: translateY(-10vh); }
+}
+</style>
+</head>
+<body>
+
+<div class="box" id="box">
+<h1>Will you be my Valentine? 💘</h1>
+<button id="yes" onclick="yesClicked()">Yes 💖</button>
+<button id="no">No 😶</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const box = document.getElementById("box");
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+function moveButton() {
+const maxX = box.clientWidth - noBtn.offsetWidth;
+const maxY = box.clientHeight - noBtn.offsetHeight;
+
+const x = Math.random() * maxX;
+const y = Math.random() * maxY;
+
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
+}
+
+function yesClicked() {
+document.body.innerHTML = `
+<div style="
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+text-align:center;
+background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+font-family:Poppins, Arial;
+animation: pop 0.6s ease;
+">
+<h1 style="font-size:42px;">🎉 Yayyyy! 💖</h1>
+<p style="font-size:26px; margin:10px 0;">
+Happy Valentine’s Day,<br>
+<strong>Budi Jasmin</strong> 😍
+</p>
+<p style="font-size:20px;">You just made my day 💕</p>
+</div>
+`;
+}
+
+// floating hearts
+setInterval(() => {
+const heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "💖";
+heart.style.left = Math.random() * 100 + "vw";
+heart.style.fontSize = (14 + Math.random() * 20) + "px";
+document.body.appendChild(heart);
+
+setTimeout(() => heart.remove(), 5000);
+}, 400);
+</script>
+
+</body>
+</html>
